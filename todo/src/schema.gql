@@ -1,0 +1,78 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Todo {
+  id: Float!
+  description: String!
+  done: Boolean!
+}
+
+type AgregationType {
+  total: Float!
+  completed: Float!
+  pending: Float!
+  totalTodoCompleted: Float! @deprecated(reason: "totalTodoCompleted no debe usarse ")
+}
+
+type Query {
+  """A simple hello world query"""
+  hello: String!
+
+  """Devolver numero aleatorios"""
+  random: Float!
+
+  """Devolver numero aleatorio entero entre 0 y 10"""
+  randomFromZeroTo10: Int!
+
+  """Devolver numero aleatorio entero entre 0 y el maximo que se envie"""
+  randomFromZeroToNumber(max: Int!): Int!
+
+  """Devolver todos los todo"""
+  todos(
+    """Filtrar por estado completado"""
+    done: Boolean
+  ): [Todo!]!
+
+  """Devolver un todo por su ID"""
+  todoById(id: Int!): Todo!
+
+  """Contar el número total de todos"""
+  totalTodos: Int!
+
+  """Contar el número de todos completados"""
+  completedTodos: Int!
+
+  """Contar el número de todos pendientes"""
+  pendingTodos: Int!
+
+  """Obtener estadísticas de todos"""
+  todosAgregation: AgregationType!
+}
+
+type Mutation {
+  """Crear un nuevo todo"""
+  createTodo(createTodoInput: CreateTodoInput!): Todo!
+
+  """Actualizar un todo"""
+  updateTodo(updateTodoInput: UpdateTodoInput!): Todo!
+
+  """Eliminar un todo"""
+  deleteTodo(id: Int!): Boolean!
+}
+
+input CreateTodoInput {
+  """Título del todo"""
+  description: String!
+}
+
+input UpdateTodoInput {
+  """Título del todo"""
+  description: String
+
+  """estado de concluido"""
+  done: Boolean
+
+  """ID del todo"""
+  id: Int!
+}
